@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clip Creator Official | Video Editing Services</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* The requested color palette */
+            --bg-dark: #050505;
+            --bg-card: #121212;
+            --primary-blue: #00d2ff;
+            --accent-green: #00ff9d;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            
+            /* Gradients */
+            --gradient-main: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+            --gradient-text: linear-gradient(to right, var(--primary-blue), var(--accent-green));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(0, 255, 157, 0.6);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-blue);
+            color: var(--bg-dark);
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Background glow effect */
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-blue);
+            filter: blur(150px);
+            opacity: 0.2;
+            z-index: -1;
+            top: 20%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .instagram-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            transition: 0.3s;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .instagram-link:hover {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 157, 0.05);
+        }
+
+        /* --- PRICING SECTION --- */
+        .pricing {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .card.featured {
+            border: 1px solid var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.1);
+        }
+
+        .card.featured::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient-main);
+            color: var(--bg-dark);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 20px 0;
+            color: var(--primary-blue);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .features li {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .features li::before {
+            content: '✓';
+            color: var(--accent-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, var(--bg-dark) 0%, #0a1512 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 20px; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">clip_creator_official</div>
+            <nav>
+                <a href="#pricing">Packages</a>
+                <a href="#features">Features</a>
+                <a href="#contact" class="btn btn-outline">Work With Us</a>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>Professional Video Editing<br><span>For Modern Creators</span></h1>
+            <p>High-quality edits that keep your audience watching. Choose a package or contact us for custom solutions.</p>
+            
+            <a href="https://instagram.com/clip_creator_official" target="_blank" class="instagram-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                @clip_creator_official
+            </a>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Why Choose Us?</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Fast Turnaround</h3>
+                        <p>Quality edits delivered quickly without compromising on excellence.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Creative Excellence</h3>
+                        <p>Professional editing that makes your content stand out from the crowd.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Priority Support</h3>
+                        <p>Dedicated support to handle your revisions and special requests.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
+            <h2 class="section-title">Choose Your Package</h2>
+            
+            <div class="pricing-grid">
+                <!-- Package 1 -->
+                <div class="card">
+                    <h3>Starter Pack</h3>
+                    <div class="price">₹399 <span>/ 5 Videos</span></div>
+                    <ul class="features">
+                        <li>5 High-Quality Edits</li>
+                        <li>Color Correction</li>
+                        <li>Sound Design & Mixing</li>
+                        <li>Subtitles & Captions</li>
+                        <li>Fast Turnaround</li>
+                    </ul>
+                    <a href="https://instagram.com/clip_creator_official" class="btn btn-outline" style="width: 100%; text-align: center;">Select Package</a>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="card featured">
+                    <h3>Pro Pack</h3>
+                    <div class="price">₹799 <span>/ 10 Videos</span></div>
+                    <ul class="features">
+                        <li>10 High-Quality Edits</li>
+                        <li>Advanced Color Grading</li>
+                        <li>Sound Design & Mixing</li>
+                        <li>Subtitles & Captions</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <a href="https://instagram.com/clip_creator_official" class="btn btn-primary" style="width: 100%; text-align: center;">Select Package</a>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="card">
+                    <h3>Premium Pack</h3>
+                    <div class="price">₹1,499 <span>/ 20 Videos</span></div>
+                    <ul class="features">
+                        <li>20 High-Quality Edits</li>
+                        <li>Premium Color Grading</li>
+                        <li>Custom Sound Design</li>
+                        <li>Professional Subtitles</li>
+                        <li>24/7 Priority Support</li>
+                    </ul>
+                    <a href="https://instagram.com/clip_creator_official" class="btn btn-outline" style="width: 100%; text-align: center;">Select Package</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="contact-box">
+                <h2>Ready to Elevate Your Content?</h2>
+                <p>Looking for a personalized video editing solution or want to work together on a long-term project? Reach out to us directly on Instagram.</p>
+                <a href="https://instagram.com/clip_creator_official" target="_blank" class="btn btn-primary">Contact on Instagram</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-links">
+                <a href="https://instagram.com/clip_creator_official" target="_blank">Instagram</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p>&copy; 2026 clip_creator_official. All rights reserved. BEST DEAL FOR VIDEO CREATION.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
